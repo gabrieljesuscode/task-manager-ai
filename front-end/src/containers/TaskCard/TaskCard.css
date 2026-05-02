@@ -1,0 +1,82 @@
+.card-container{
+    padding: 5px;
+
+    width: 100%;
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    color: #000;
+
+}
+
+.card-body {
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.completed {
+    background-color: #d1ffd1;
+}
+
+.description-area div {
+    margin-top: 10px;
+    width: 100%;
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    width: 100%;
+
+    font-size: 0.9em;
+}
+
+.description-icon-area {
+    display: flex;
+    align-items: center;
+    width: 10%;
+    height: 100%;
+}
+
+.description-icon {
+    color: #000;
+    font-size: 30px;
+    padding: 10px;
+    display: inline-block;       
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.description-icon.rotated {
+  transform: rotate(90deg);    
+}
+
+.title-area {
+    width: 50%;
+    font-size: 1em;
+    padding: 10px;
+  /* background-color: #000; */
+
+}
+
+.completed-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 20%;
+
+    user-select: none;
+    
+}
+
+.completed-area p {
+    font-size: 0.9em;
+}
+
+.completed-title {
+    text-decoration: line-through;
+}

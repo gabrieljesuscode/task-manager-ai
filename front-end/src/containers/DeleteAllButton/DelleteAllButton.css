@@ -1,0 +1,30 @@
+
+ .delete-all-button {
+    
+    
+    padding: 15px;
+    background-color: #fff;
+    color: #5773e4;
+    font-weight: bold;
+    cursor: pointer;
+    scale: 1;
+    border-radius: 14px;
+    border: 2px solid #5773e4;
+    font-size: 1em;
+
+
+
+    transition: all 0.1s ease-in-out;
+
+}
+
+.delete-all-button:hover {
+    scale: 1.02;
+    border: 2px solid #5773e4;
+    box-shadow: 0px 0px 15px 1px rgba(87, 115, 228, 0.9);
+}
+
+.delete-all-button:active {
+    scale: 0.98;
+    box-shadow: none;
+}
