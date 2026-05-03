@@ -1,8 +1,8 @@
-import categoriesMistralAI from '../../APIs/categoriesMistralAI';
 import type { TaskData } from '../../interfaces/TaskData';
 import './Categories.css';
 import { useEffect, useRef, useState } from 'react';
 import { CategoryBtn } from './CategoryBtn';
+import { AICategories } from '../../hooks/AiCategories';
 
 
 
@@ -11,12 +11,6 @@ interface CategoriesBarProps {
     visibleTasks: TaskData[];
     handleSelectedTitles: (taskTitles: string[]) => void;
 }
-
-// Type Guard para garantir que a resposta é um array de strings
-const isArrayOfStrings = (arr: unknown): arr is string[]=> { 
-    return Array.isArray(arr) && arr.every(item => typeof item === 'string');
-}
-
     
 
 export function CategoriesBar ({data, visibleTasks, handleSelectedTitles}: CategoriesBarProps) {
@@ -26,18 +20,18 @@ export function CategoriesBar ({data, visibleTasks, handleSelectedTitles}: Categ
 
     useEffect(() => {
 
-
         const categoriesList = async () => {
-            const response = await categoriesMistralAI(data); // Vem como um objeto de chaves e valor
+            if (data.length < 3) {
+                setCategories([]);
+                return;
+            }
+            const response = await AICategories(); // Vem como um objeto de chaves e valor
             
             if(!response) {
                 return;
             }
-
-            // Transforma em um array de tuplas [categoria, tarefas] e filtra apenas as que tem um array de strings como tarefas
-            const categoriesArray = Object.entries(response).filter(([, tasks]) => isArrayOfStrings(tasks));
-
-            setCategories(categoriesArray); // 
+            console.log("Resposta da API de categorias:", Object.entries(response));
+            setCategories(Object.entries(response)); // 
         }
         
         const currentTitlesRef = data.map(item => item.title).join(', ');
