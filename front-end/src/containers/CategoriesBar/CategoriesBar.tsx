@@ -25,23 +25,23 @@ export function CategoriesBar ({data, visibleTasks, handleSelectedTitles}: Categ
                 setCategories([]);
                 return;
             }
+
             const response = await AICategories(); // Vem como um objeto de chaves e valor
             
             if(!response) {
                 return;
             }
-            console.log("Resposta da API de categorias:", Object.entries(response));
+
             setCategories(Object.entries(response)); // 
         }
         
         const currentTitlesRef = data.map(item => item.title).join(', ');
-        if (currentTitlesRef !== lastTitlesRef.current) {
-            console.log("Antigos títulos:", lastTitlesRef.current);
-            console.log("Novos títulos:", currentTitlesRef);
 
+        if (currentTitlesRef !== lastTitlesRef.current) {
             lastTitlesRef.current = currentTitlesRef;
             categoriesList();
         }
+
     }, [data]);
 
 

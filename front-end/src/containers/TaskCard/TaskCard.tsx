@@ -33,7 +33,6 @@ export function TaskCard ({ id, title, description, isCompleted }: TaskCardProps
         }
 
         updateTask(taskData);
-        console.log("atualizado");
     };
 
     

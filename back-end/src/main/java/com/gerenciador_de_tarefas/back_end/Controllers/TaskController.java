@@ -45,14 +45,7 @@ public class TaskController {
     @CrossOrigin(origins = "*" ,allowedHeaders = "*")
     @PutMapping
     public void updateTask(@RequestBody TaskResponseDTO data){
-        Task task = taskRepository.findById(data.id()).orElseThrow();
-        
-        task.setTitle(data.title());
-        task.setDescription(data.description());
-        task.setCompleted(data.isCompleted());
-
-        taskRepository.save(task);
-
+        taskRepository.updateTaskById(data.id(), data.title(), data.description(), data.isCompleted());
         return;
     }
 
@@ -61,16 +54,5 @@ public class TaskController {
     public String deleteTask(@PathVariable Long id){
         taskRepository.deleteById(id);
         return "";
-    }
-
-    @CrossOrigin(origins = "*" ,allowedHeaders = "*")
-    @PatchMapping("/{id}")
-
-    public void toggleTaskCompletion(@PathVariable Long id) {
-        Task task = taskRepository.findById(id).orElseThrow();
-
-        task.setCompleted(!task.isCompleted());
-
-        taskRepository.save(task);
     }
 }
