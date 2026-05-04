@@ -6,7 +6,7 @@ import axios from 'axios';
 const API_URL = import.meta.env.VITE_API_URL;
 
 const fetchData = async () : AxiosPromise<TaskData[]> => {
-    const response = axios.get(API_URL + '/tarefas');
+    const response = axios.get(API_URL + '/tasks');
     return response;
 }
 

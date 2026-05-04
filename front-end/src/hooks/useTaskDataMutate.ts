@@ -5,7 +5,7 @@ import type { TaskData } from "../interfaces/TaskData";
 const API_URL = import.meta.env.VITE_API_URL;
 
 const postData = async (data: TaskData) : AxiosPromise<any> => {
-    const response = axios.post(API_URL + '/tarefas', data);
+    const response = axios.post(API_URL + '/tasks', data);
     return response;
 }
 
@@ -16,7 +16,7 @@ export function useTaskDataMutate(){
         mutationFn: postData,
         retry: 2,
         onSuccess: () => {
-            queryClient.invalidateQueries(['task-data']);
+            queryClient.invalidateQueries({ queryKey: ['task-data'] });
         }
     });
 

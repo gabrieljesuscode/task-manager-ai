@@ -8,7 +8,7 @@ const deleteData = async (id: number) : AxiosPromise<TaskData> => {
     if (!id) {
         throw new Error('ID is required to delete a task');
     }
-    const response = axios.delete(API_URL + `/tarefas/${id}`);
+    const response = axios.delete(API_URL + `/tasks/${id}`);
     return response;
 }
 
@@ -19,7 +19,7 @@ export function useTaskDataDelete(){
         mutationFn: deleteData,
         retry: 2,
         onSuccess: () => {
-            queryClient.invalidateQueries(['task-data']);
+            queryClient.invalidateQueries({ queryKey: ['task-data'] });
         }
     });
 

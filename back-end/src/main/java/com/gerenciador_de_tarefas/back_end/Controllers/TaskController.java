@@ -20,7 +20,7 @@ import com.gerenciador_de_tarefas.back_end.Task.TaskRequestDTO;
 import com.gerenciador_de_tarefas.back_end.Task.TaskResponseDTO;
 
 @RestController
-@RequestMapping("/tarefas")
+@RequestMapping("/tasks")
 public class TaskController {
 
     @Autowired
