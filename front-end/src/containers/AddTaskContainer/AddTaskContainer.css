@@ -58,6 +58,10 @@
   font-size: 1.25em;
 }
 
+.add-container label {
+    font-size: 0.9em;
+}
+
 
 button:hover {
     scale: 1.02;
@@ -67,4 +71,15 @@ button:hover {
 button:active {
     scale: 0.98;
     box-shadow: none;
+}
+
+
+@media (max-width: 1023px) {
+    .add-container {
+        gap:10px;
+    }
+    .add-container label {
+        font-size: 0.9em;
+    }
+
 }

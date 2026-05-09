@@ -55,3 +55,26 @@
     color: white;
 }
 
+@media (max-width: 1023px) {
+.categories-container i{
+    font-size: 1.75em;
+}
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.categories-container h2 {
+    background-color: #000;
+    font-size: 0.9em;
+    width: 118px;
+    
+}
+.categories-container {
+    grid-template-columns: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+}
