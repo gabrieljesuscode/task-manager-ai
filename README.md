@@ -141,8 +141,50 @@ Resposta esperada:
   "Trabalho": ["Enviar relatório", "Reunião com equipe"]
 }
 ```
+### 🌐 Deploy da Aplicação
 
-### Deploy da Aplicação
-A aplicação ainda não possui deploy público. Para execução local, siga as instruções acima. (parágrafo)
+A aplicação está disponível publicamente em: **[task-manager-ai-ten.vercel.app](https://task-manager-ai-ten.vercel.app/)**
+
+#### Arquitetura do Deploy
+
+| Camada | Tecnologia | Plataforma | URL |
+|--------|------------|------------|-----|
+| Front-end | React + TypeScript (Vite) | **Vercel** | [task-manager-ai-ten.vercel.app](https://task-manager-ai-ten.vercel.app/) |
+| Back-end | Java + Spring Boot | **Render** | — |
+| Banco de Dados | PostgreSQL | **Neon** | — |
+
+#### ⚠️ Atenção: Comportamento do Render (Plano Gratuito)
+
+O back-end está hospedado no plano gratuito do Render, que possui um mecanismo de **cold start**:
+
+* Após **15 minutos sem receber requisições**, o servidor entra em modo de hibernação.
+* A primeira requisição após a hibernação pode levar de **50 a 120 segundos** para responder.
+* Durante esse período, o front-end pode exibir uma mensagem de carregamento ou erro de timeout.
+
+**Por que isso acontece?** O Render precisa provisionar o servidor, iniciar o container Docker, carregar a JVM e estabelecer a conexão com o banco de dados Neon — tudo isso leva tempo.
+
+#### 🛠️ Como lidar com o Cold Start
+
+Para uma experiência mais fluida:
+
+1. **Tenha paciência na primeira requisição.** Após o back-end "acordar", as próximas requisições serão rápidas.
+2. **Mantenha o back-end ativo.** Ferramentas gratuitas como [UptimeRobot](https://uptimerobot.com) ou [cron-job.org](https://cron-job.org) podem enviar requisições periódicas ao endpoint `/api/health` a cada 5-10 minutos, evitando que o serviço hiberne.
+3. **Em caso de erro 502 ou timeout,** aguarde 2 minutos e recarregue a página. Isso geralmente resolve.
+
+#### 🔧 Possíveis Erros e Soluções
+
+| Sintoma | Causa Provável | Solução |
+|---------|----------------|---------|
+| Tela em branco ao carregar | Cold start do Render | Aguarde 1-2 minutos e recarregue |
+| Erro `502 Bad Gateway` | Back-end em hibernação ou offline | O Render está reiniciando o serviço. Aguarde alguns minutos. |
+| Tarefas aparecem duplicadas ou estranhas | Banco de dados compartilhado entre deploys | O banco Neon pode conter dados de teste. Novas tarefas criadas por você serão persistidas normalmente. |
+| Botão "Criar" não responde | Timeout na chamada à API | O back-end pode estar em cold start. Aguarde e tente novamente. |
+| Categoria IA não aparece | API da Mistral AI com erro ou cold start | Verifique se a chave da API está ativa e o back-end está online. |
+
+#### 📝 Notas sobre o Deploy
+
+* O banco de dados **Neon** é compartilhado entre todos os usuários que acessam a aplicação. As tarefas criadas por um visitante são visíveis para todos.
+* A categorização por IA utiliza o modelo **Mistral Small** e depende da disponibilidade da API da Mistral AI.
+* Este deploy é destinado exclusivamente para fins de demonstração e portfólio. Não armazene dados sensíveis.
 
 _Este projeto foi desenvolvido para fins de estudo e portfólio._
